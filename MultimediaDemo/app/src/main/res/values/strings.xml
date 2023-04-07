@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MultimediaDemo</string>
+    <!-- 버튼 텍스트 -->
+    <string name="btn_audio">오디오 재생</string>
+    <string name="btn_video">비디오 재생</string>
+</resources>
+

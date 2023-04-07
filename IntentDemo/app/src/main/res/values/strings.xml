@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">IntentDemo</string>
+    <!-- 사용자가 추가 -->
+    <string name="tv_title">반환된 문자열</string>
+    <string name="btn_text">문자열 반환 받기</string>
+    <string name="temp_text">_________________________________________</string>
+    <string name="btn_contact">연락처 보기</string>
+    <string name="btn_call">전환걸기</string>
+    <!-- SubActivity에서 사용되는 텍스트 -->
+    <string name="btn_ok">입력 완료</string>
+    <string name="btn_cancel">입력 취소</string>
+    <string name="tv_hint">여기에 내용을 입력하세요</string>
+</resources>
+
+
