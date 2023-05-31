@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_apple"
+        android:title="@string/menu_apple" />
+    <item
+        android:id="@+id/menu_graph"
+        android:title="@string/menu_grape" />
+    <item
+        android:id="@+id/menu_banana"
+        android:title="@string/menu_banana" />
+</menu>
+

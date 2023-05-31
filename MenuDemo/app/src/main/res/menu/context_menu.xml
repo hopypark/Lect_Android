@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/context_bg_red"
+        android:title="@string/context_bg_red" />
+    <item
+        android:id="@+id/context_bg_green"
+        android:title="@string/context_bg_green" />
+    <item
+        android:id="@+id/context_bg_blue"
+        android:title="@string/context_bg_blue" />
+</menu>
