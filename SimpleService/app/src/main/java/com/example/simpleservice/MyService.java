@@ -12,13 +12,6 @@ public class MyService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        Log.d(TAG, "onBind() 호출됨");
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate() 호출됨");
@@ -26,7 +19,6 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         Log.d(TAG, "onStartCommand() 호출됨");
         if (intent == null){
             return Service.START_STICKY;
@@ -36,26 +28,17 @@ public class MyService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void processCommand(Intent intent){
+    private void processCommand(Intent intent) {
         String command = intent.getStringExtra("command");
         String name = intent.getStringExtra("name");
 
-        for(int i = 0 ; i < 5; i++){
+        Log.d(TAG, "command: " + command + ", name: " + name);
+        for(int i = 0 ; i < 5 ; i++){
             try{
                 Thread.sleep(1000);
-            } catch(Exception e){}
-
-            Log.d(TAG, "waiting + " + i + " seconds.");
-
+            } catch (Exception e){}
+            Log.d(TAG, "Waiting " + i + " seconds.");
         }
-        // 정보를 다시 보내기
-        Intent showIntent = new Intent(getApplicationContext(), MainActivity.class);
-        showIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                            Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                            Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        showIntent.putExtra("command", "show");
-        showIntent.putExtra("name", name + " from service.");
-        startActivity(showIntent);
     }
 
     @Override
@@ -63,4 +46,13 @@ public class MyService extends Service {
         super.onDestroy();
         Log.d(TAG, "onDestroy() 호출됨");
     }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.d(TAG, "onBind() 호출됨");
+        // TODO: Return the communication channel to the service.
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
+
+
