@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ServiceDemo</string>
+    <!-- 제목과 버튼 텍스트 -->
+    <string name="title">음악 재생 서비스 테스트</string>
+    <string name="btn_play">음악 재생</string>
+    <string name="btn_stop">음악 중지</string>
 </resources>
+
