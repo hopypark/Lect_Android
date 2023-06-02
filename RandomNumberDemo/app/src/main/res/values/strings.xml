@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RandomNumberDemo</string>
+    <!-- 유저 텍스트 -->
+    <string name="tv_title">연결된 서비스 예제</string>
+    <string name="btn_text">난수 생성하기</string>
+</resources>
+
