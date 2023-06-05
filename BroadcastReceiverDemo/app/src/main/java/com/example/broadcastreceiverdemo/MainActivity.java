@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver airplaneReceiver;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 sendBroadcast(intent); // 인텐트를 사용한 Broadcast 보내기
             }
         });
-        
+
         // 방송수신자 등록 - 동적 등록
         airplaneReceiver = new MyAirplaneReceiver();
         IntentFilter filter = new IntentFilter(); // 받고자하는 방송 내용에 대한 필터 설정
