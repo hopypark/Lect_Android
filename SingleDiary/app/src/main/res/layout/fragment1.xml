@@ -14,7 +14,7 @@
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_btn"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="48dp"
             android:checked="true"
             android:gravity="center"
             android:thumb="@drawable/shape_switch_thumb"
@@ -22,23 +22,26 @@
             android:layout_marginTop="10dp"
             app:switchMinWidth="80dp"
             app:track="@drawable/selector_switch"/>
-        <!--<com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/switchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:padding="8dp"
-            android:textSize="20sp"
-            />-->
+<!--        <lib.kingja.switchbutton.SwitchMultiButton-->
+<!--            android:id="@+id/switchButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:padding="8dp"-->
+<!--            android:textSize="20sp"-->
+<!--            tools:ignore="MissingClass" />-->
 
         <Button
             android:id="@+id/todayWriteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/select_button"
             android:text="오늘 작성"
             android:textColor="@android:color/white" />

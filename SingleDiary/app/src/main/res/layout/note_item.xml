@@ -20,7 +20,7 @@
         android:visibility="visible">
 
         <ImageView
-            android:id="@+id/modImageView"
+            android:id="@+id/moodImageView"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:layout_gravity="center_vertical"
@@ -120,7 +120,7 @@
                 android:layout_marginTop="10dp">
 
                 <ImageView
-                    android:id="@+id/modImageView2"
+                    android:id="@+id/moodImageView2"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_alignParentLeft="true"
