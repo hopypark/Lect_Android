@@ -3,6 +3,8 @@ package com.example.broadcastreceiverdemo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 public class MyAirplaneReceiver extends BroadcastReceiver {
@@ -19,8 +21,17 @@ public class MyAirplaneReceiver extends BroadcastReceiver {
             } else {
                 Log.d(TAG, "Action: 비행기 모드 해제");
             }
-        }else if (intent.getAction().equals(MainActivity.MY_ACTION_BROADCAST)){
-            Log.d(TAG, "사용자가 보낸 방송을 받음");
+        } else if(intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)){
+            Log.d(TAG, "Connectivity changed.");
+            ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            boolean isConnected = (networkInfo != null && networkInfo.isConnectedOrConnecting());
+            if (isConnected){
+                Log.d(TAG, "CELLULAR: " + (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) 
+                    + ", WIFI: " + (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) );
+            }else{
+                Log.d(TAG, "연결된 네트워크가 없습니다.");
+            }
         }
     }
 }

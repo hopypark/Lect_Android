@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         airplaneReceiver = new MyAirplaneReceiver();
         IntentFilter filter = new IntentFilter(); // 받고자하는 방송 내용에 대한 필터 설정
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED); // AIRPLANE 모드가 변경되는 것
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(MY_ACTION_BROADCAST); // filter 항목으로 MY_ACTION_BROADCAST 추가
         registerReceiver(airplaneReceiver, filter); // 리시버에 등록
     }
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         IntentFilter filter = new IntentFilter(); // 받고자하는 방송 내용에 대한 필터 설정
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED); // AIRPLANE 모드가 변경되는 것
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+
         registerReceiver(airplaneReceiver, filter); // 리시버에 등록
     }
 
