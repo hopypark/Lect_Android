@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements OnNoteItemClickListener{
-    final static String TAG = "SingleDiary - NoteAdapter";
+    final static String TAG = "SingleDiary";
     
     ArrayList<Note> items = new ArrayList<Note>();
     OnNoteItemClickListener listener;
@@ -26,6 +26,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d(TAG, "onCreateViewHolder()");
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.note_item, parent, false);
         return new ViewHolder(itemView, this, layoutType);
@@ -33,6 +34,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Log.d(TAG, "onBindViewHolder()");
        Note item = items.get(position);
        holder.setItem(item);
        holder.setLayoutType(layoutType);
@@ -41,10 +43,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "getItemCount(): " + items.size());
         return items.size();
     }
 
     public void addItem(Note item){
+        Log.d(TAG, "addItem(): " + item);
         items.add(item);
     }
 
@@ -53,6 +57,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
     }
 
     public Note getItem(int position){
+        Log.d(TAG, "getItem(): " + items.get(position));
         return items.get(position);
     }
 
@@ -96,7 +101,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
             weatherImageView2 = itemView.findViewById(R.id.weatherImageView2);
 
             contentsTextView = itemView.findViewById(R.id.contentsTextView);
-            contentsTextView2 = itemView.findViewById(R.id.weatherImageView2);
+            contentsTextView2 = itemView.findViewById(R.id.contentsTextView2);
 
             locationTextView = itemView.findViewById(R.id.locationTextView);
             locationTextView2 = itemView.findViewById(R.id.locationTextView2);
