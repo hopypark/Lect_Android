@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab1"
+        android:enabled="true"
+        android:title="목록"
+        android:icon="@drawable/list_48"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/tab2"
+        android:enabled="true"
+        android:title="작성"
+        android:icon="@drawable/write_48"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/tab3"
+        android:enabled="true"
+        android:title="통계"
+        android:icon="@drawable/graph_48"
+        app:showAsAction="ifRoom"/>
+</menu>
