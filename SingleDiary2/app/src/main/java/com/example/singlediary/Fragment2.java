@@ -87,4 +87,10 @@ public class Fragment2 extends Fragment {
 
     public void setDateString(String currentDateString) {
     }
+
+    public void setAddress(String currentAddress) {
+    }
+
+    public void setWeather(String wfKor) {
+    }
 }
