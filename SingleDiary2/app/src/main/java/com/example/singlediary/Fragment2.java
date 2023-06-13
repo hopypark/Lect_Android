@@ -84,4 +84,7 @@ public class Fragment2 extends Fragment {
         });
         sliderView.setInitialIndex(2);
     }
+
+    public void setDateString(String currentDateString) {
+    }
 }
