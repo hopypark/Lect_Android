@@ -165,7 +165,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:background="@drawable/select_button"
-            android:text="저장"
+            android:text="닫기"
             android:textColor="@android:color/white"/>
     </RelativeLayout>
 </RelativeLayout>
