@@ -136,7 +136,8 @@ public class Fragment3 extends Fragment {
         leftAxis3.setDrawGridLines(true);
         leftAxis3.setGranularityEnabled(true);
         leftAxis3.setAxisMinimum(0f);
-        leftAxis3.setAxisMaximum(-9f);
+        leftAxis3.setAxisMaximum(170f);
+        leftAxis3.setYOffset(-9f);
         leftAxis3.setTextColor(Color.rgb(255, 192, 56));
 
         YAxis rightAxis3 = chart3.getAxisRight();
@@ -179,16 +180,11 @@ public class Fragment3 extends Fragment {
     private void setData2() {
         ArrayList<BarEntry> entries = new ArrayList<>();
 
-        entries.add(new BarEntry(1.0f, 20.0f,
-                ContextCompat.getDrawable(getContext(),R.drawable.smile1_24)));
-        entries.add(new BarEntry(2.0f, 40.0f,
-                ContextCompat.getDrawable(getContext(),R.drawable.smile2_24)));
-        entries.add(new BarEntry(3.0f, 60.0f,
-                ContextCompat.getDrawable(getContext(),R.drawable.smile3_24)));
-        entries.add(new BarEntry(4.0f, 30.0f,
-                ContextCompat.getDrawable(getContext(),R.drawable.smile4_24)));
-        entries.add(new BarEntry(5.0f, 90.0f,
-                ContextCompat.getDrawable(getContext(),R.drawable.smile5_24)));
+        entries.add(new BarEntry(1.0f, 20.0f, ContextCompat.getDrawable(getContext(),R.drawable.smile1_24)));
+        entries.add(new BarEntry(2.0f, 40.0f, ContextCompat.getDrawable(getContext(),R.drawable.smile2_24)));
+        entries.add(new BarEntry(3.0f, 60.0f, ContextCompat.getDrawable(getContext(),R.drawable.smile3_24)));
+        entries.add(new BarEntry(4.0f, 30.0f, ContextCompat.getDrawable(getContext(),R.drawable.smile4_24)));
+        entries.add(new BarEntry(5.0f, 90.0f, ContextCompat.getDrawable(getContext(),R.drawable.smile5_24)));
 
         BarDataSet dataSet2 = new BarDataSet(entries, "Sinus Function");
         dataSet2.setColor(Color.rgb(240, 120, 124));
