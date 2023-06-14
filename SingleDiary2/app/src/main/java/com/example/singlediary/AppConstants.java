@@ -1,6 +1,10 @@
 package com.example.singlediary;
 
+import android.os.Looper;
+
 import java.text.SimpleDateFormat;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class AppConstants {
     public static final int REQ_LOCATION_BY_ACCESS = 101;
@@ -18,4 +22,14 @@ public class AppConstants {
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("YYYYMMddHHmm");
     public static SimpleDateFormat dateFormat2 = new SimpleDateFormat("YYYY-MM-dd HH시");
     public static SimpleDateFormat dateFormat3 = new SimpleDateFormat("MM월 dd일");
+
+//    private static Handler handler = new Handler(Looper.getMainLooper()).postDelayed(new Run)
+
+//    private static final String TAG = "AppConstants";
+//    public static void println(final String data){
+//        handler.post(new Runnable(
+//
+//        ));
+//    }
+
 }

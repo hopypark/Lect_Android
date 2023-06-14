@@ -33,7 +33,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements OnTabItemSelectedListener, MyApplication.OnResponseListener {
+public class MainActivity extends AppCompatActivity
+        implements OnTabItemSelectedListener, OnRequestListener, MyApplication.OnResponseListener {
     private static final String TAG = "MainActivity";
 
     Fragment1 fragment1;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements OnTabItemSelected
     String currentDateString;
     Date currentDate;
 
+    @Override
     public void onRequest(String command){
         if (command != null){
             if (command.equals("getCurrentLocation")){
