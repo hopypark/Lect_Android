@@ -61,42 +61,34 @@ public class Fragment2 extends Fragment {
     File file;
     Bitmap resultPhotoBitmap;
 
-    ActivityResultLauncher<Intent> captureLauncher = registerForActivityResult(
+    ActivityResultLauncher<Intent> activitylauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode() == Activity.RESULT_OK) {
+            if(result.getResultCode() == AppConstants.REQ_PHOTO_CAPTURE) {
                 Log.d(TAG, "onActivityResult() for REQ_PHOTO_CAPTURE.");
                 resultPhotoBitmap = decodeSampledBitmapFromResource(file,
                         pictureImageView.getWidth(), pictureImageView.getHeight());
                 pictureImageView.setImageBitmap(resultPhotoBitmap);
+            }else if (result.getResultCode() == AppConstants.REQ_PHOTO_SELECTION){
+                Log.d(TAG, "onActivityResult() for REQ_PHOTO_SELECTION.");
+                Intent intent = result.getData();
+                Uri fileUri = intent.getData();
+                //
+                ContentResolver resolver = context.getContentResolver();
+                try{
+                    InputStream inStream = resolver.openInputStream(fileUri);
+                    resultPhotoBitmap = BitmapFactory.decodeStream(inStream);
+                    pictureImageView.setImageBitmap(resultPhotoBitmap);
+                    inStream.close();
+                    isPhotoCaptured = true;
+                }catch (Exception e){e.printStackTrace();}
             }
         }
     });
 
-    ActivityResultLauncher<Intent> selectionLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Log.d(TAG, "onActivityResult() for REQ_PHOTO_SELECTION.");
-                        Intent intent = result.getData();
-                        Uri fileUri = intent.getData();
-                        //
-                        ContentResolver resolver = context.getContentResolver();
-                        try{
-                            InputStream inStream = resolver.openInputStream(fileUri);
-                            resultPhotoBitmap = BitmapFactory.decodeStream(inStream);
-                            pictureImageView.setImageBitmap(resultPhotoBitmap);
-                            inStream.close();
-                            isPhotoCaptured = true;
-                        }catch (Exception e){e.printStackTrace();}
-                    }
-                }
-            }
-    );
+
 
 
     @Override
@@ -263,7 +255,7 @@ public class Fragment2 extends Fragment {
         intent.setAction(Intent.ACTION_GET_CONTENT);
 
 //        startActivityForResult(intent, AppConstants.REQ_PHOTO_SELECTION);
-        selectionLauncher.launch(intent);
+        activitylauncher.launch(intent);
     }
 
 
@@ -283,7 +275,7 @@ public class Fragment2 extends Fragment {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 //        startActivityForResult(intent, AppConstants.REQ_PHOTO_CAPTURE);
-        captureLauncher.launch(intent);
+        activitylauncher.launch(intent);
     }
 
     private File createFile() {
