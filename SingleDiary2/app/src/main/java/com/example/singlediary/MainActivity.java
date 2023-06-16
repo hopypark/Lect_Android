@@ -2,9 +2,14 @@ package com.example.singlediary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -27,6 +32,7 @@ import com.stanfy.gsonxml.XmlParserCreator;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +40,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
-        implements OnTabItemSelectedListener, OnRequestListener, MyApplication.OnResponseListener {
+        implements OnTabItemSelectedListener, OnRequestListener, MyApplication.OnResponseListener, ActivityCompat.OnRequestPermissionsResultCallback {
     private static final String TAG = "MainActivity";
 
     Fragment1 fragment1;
@@ -52,11 +58,55 @@ public class MainActivity extends AppCompatActivity
     String currentDateString;
     Date currentDate;
 
+    String[] permissions = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
+
     @Override
     public void onRequest(String command){
         if (command != null){
             if (command.equals("getCurrentLocation")){
+                Log.d(TAG, "request current location from Fragment2.");
+                checkPermissions(permissions);
                 getCurrentLocation();
+            }
+        }
+    }
+
+    private void checkPermissions(String[] permissions) {
+        Log.d(TAG, "check permissions:  " + permissions);
+        ArrayList<String> targetList = new ArrayList<String>();
+
+        for(int i = 0; i < permissions.length ; i++){
+            String currPermission = permissions[i];
+            int permissionCheck = ContextCompat.checkSelfPermission(this, currPermission);
+            if(permissionCheck != PackageManager.PERMISSION_GRANTED){
+                Log.d(TAG, "request permission for " + permissions[i]);
+                if(!ActivityCompat.shouldShowRequestPermissionRationale(this, currPermission))
+                    targetList.add(permissions[i]);
+            }
+        }
+        if (targetList.size() > 0) {
+            String[] targets = new String[targetList.size()];
+            Log.d(TAG, "requestPermissions: " + targets.length);
+            targetList.toArray(targets);
+            ActivityCompat.requestPermissions(this, targets, 101);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 101){
+            if (grantResults.length > 0){
+              for(int i = 0; i < grantResults.length; i++)  {
+                  if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                      Log.d(TAG, "Granted.");
+                  }else {
+                      Log.d(TAG, "Not Granted.");
+                  }
+              }
             }
         }
     }

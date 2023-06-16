@@ -1,11 +1,13 @@
 package com.example.singlediary;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -28,6 +30,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -35,6 +39,7 @@ import com.github.channguyen.rsv.RangeSliderView;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Fragment2 extends Fragment {
@@ -61,17 +66,13 @@ public class Fragment2 extends Fragment {
     File file;
     Bitmap resultPhotoBitmap;
 
-    ActivityResultLauncher<Intent> activitylauncher = registerForActivityResult(
+
+    ActivityResultLauncher<Intent> photoSelectionlauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode() == AppConstants.REQ_PHOTO_CAPTURE) {
-                Log.d(TAG, "onActivityResult() for REQ_PHOTO_CAPTURE.");
-                resultPhotoBitmap = decodeSampledBitmapFromResource(file,
-                        pictureImageView.getWidth(), pictureImageView.getHeight());
-                pictureImageView.setImageBitmap(resultPhotoBitmap);
-            }else if (result.getResultCode() == AppConstants.REQ_PHOTO_SELECTION){
+            if (result.getResultCode() == AppConstants.REQ_PHOTO_SELECTION){
                 Log.d(TAG, "onActivityResult() for REQ_PHOTO_SELECTION.");
                 Intent intent = result.getData();
                 Uri fileUri = intent.getData();
@@ -88,8 +89,19 @@ public class Fragment2 extends Fragment {
         }
     });
 
-
-
+    ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result.getResultCode() == AppConstants.REQ_PHOTO_CAPTURE) {
+                Log.d(TAG, "onActivityResult() for REQ_PHOTO_CAPTURE.");
+                resultPhotoBitmap = decodeSampledBitmapFromResource(file,
+                        pictureImageView.getWidth(), pictureImageView.getHeight());
+                pictureImageView.setImageBitmap(resultPhotoBitmap);
+            }
+        }
+    });
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -127,6 +139,8 @@ public class Fragment2 extends Fragment {
         return rootView;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+
 
     private void initUI(ViewGroup rootView) {
         weatherIcon = rootView.findViewById(R.id.weatherIcon);
@@ -255,7 +269,7 @@ public class Fragment2 extends Fragment {
         intent.setAction(Intent.ACTION_GET_CONTENT);
 
 //        startActivityForResult(intent, AppConstants.REQ_PHOTO_SELECTION);
-        activitylauncher.launch(intent);
+        photoSelectionlauncher.launch(intent);
     }
 
 
@@ -275,7 +289,7 @@ public class Fragment2 extends Fragment {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 //        startActivityForResult(intent, AppConstants.REQ_PHOTO_CAPTURE);
-        activitylauncher.launch(intent);
+        cameraLauncher.launch(intent);
     }
 
     private File createFile() {
@@ -319,11 +333,11 @@ public class Fragment2 extends Fragment {
 
 
     public void setDateString(String currentDateString) {
-        locationTextView.setText(currentDateString);
+        dateTextView.setText(currentDateString);
     }
 
     public void setAddress(String currentAddress) {
-        dateTextView.setText(currentAddress);
+        locationTextView.setText(currentAddress);
     }
 
 
