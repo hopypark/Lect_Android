@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity
     Location currentLocation;
     GPSListener gpsListener;
 
+    public static NoteDatabase mDatabase = null;
+
     int locationCount = 0;
     String currentWeather;
     String currentAddress;
@@ -184,7 +186,31 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         }); // bottomNavigation click
+        // 데이터베이스 열기
+        openDatabase();
+    }
 
+    private void openDatabase() {
+        if(mDatabase != null){
+            mDatabase.close();
+            mDatabase = null;
+        }
+        mDatabase = NoteDatabase.getInstance(this);
+        boolean isOpen = mDatabase.open();
+        if(isOpen){
+            Log.d(TAG, "Note database is open.");
+        }else{
+            Log.d(TAG, "Note database is not open.");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDatabase != null){
+            mDatabase.close();
+            mDatabase = null;
+        }
     }
 
     @Override
