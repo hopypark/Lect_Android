@@ -258,29 +258,47 @@ public class Fragment2 extends Fragment {
 
         contentsInput = rootView.findViewById(R.id.contentsInput);
         pictureImageView = rootView.findViewById(R.id.pictureImageView);
-        pictureImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isPhotoCaptured || isPhotoFileSaved){
-                    showDialog(AppConstants.CURRENT_PHOTO_EX);
-                } else {
-                    showDialog(AppConstants.CURRENT_PHOTO);
+//        pictureImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(isPhotoCaptured || isPhotoFileSaved){
+//                    showDialog(AppConstants.CURRENT_PHOTO_EX);
+//                } else {
+//                    showDialog(AppConstants.CURRENT_PHOTO);
+//                }
+//            }
+//        });
+        pictureImageView.setOnClickListener(
+                it -> {
+                    if(isPhotoCaptured || isPhotoFileSaved){
+                        showDialog(AppConstants.CURRENT_PHOTO_EX);
+                    } else {
+                        showDialog(AppConstants.CURRENT_PHOTO);
+                    }
                 }
-            }
-        });
+        );
 
         Button saveButton = rootView.findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        saveButton.setOnClickListener(it->{
                 if (mMode == AppConstants.MODE_INSERT){
                     saveNote();
                 } else if (mMode == AppConstants.MODE_MODIFY) {
                     modifyNote();
                 }
                 if(listener != null) listener.onTabSelected(0);
-            }
+
         });
+//        saveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mMode == AppConstants.MODE_INSERT){
+//                    saveNote();
+//                } else if (mMode == AppConstants.MODE_MODIFY) {
+//                    modifyNote();
+//                }
+//                if(listener != null) listener.onTabSelected(0);
+//            }
+//        });
 
         Button deleteButton = rootView.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
