@@ -6,8 +6,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -17,7 +15,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
