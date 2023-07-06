@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">StopwatchDemo</string>
+
+    <string name="btn_start">시작</string>
+    <string name="btn_stop">정지</string>
+    <string name="btn_reset">재설정</string>
+    <!-- 시간 표시 -->
+    <string name="tv_minute">00</string>
+    <string name="tv_second">:00</string>
+    <string name="tv_millisecond">.00</string>
+</resources>
+
