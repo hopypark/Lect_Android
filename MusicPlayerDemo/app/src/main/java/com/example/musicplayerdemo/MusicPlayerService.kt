@@ -2,24 +2,28 @@ package com.example.musicplayerdemo
 
 import android.app.Service
 import android.content.Intent
-import android.os.Binder
 import android.os.IBinder
-import kotlin.reflect.KClass
 
 class MusicPlayerService : Service() {
 
-    var mBinder: MusicPlayerBinder = MusicPlayerBinder()
-
-    inner class MusicPlayerBinder: Binder() {
-
-        fun getService(): MusicPlayerService {
-            return this@MusicPlayerService
-        }
-
-    }
-
     override fun onBind(intent: Intent): IBinder {
         TODO("Return the communication channel to the service.")
-        return mBinder
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        startForegroundService()
+    }
+
+    private fun startForegroundService() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return super.onStartCommand(intent, flags, startId)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
