@@ -1,7 +1,10 @@
 package com.example.musicplayerdemo
 
 import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
 import android.content.ServiceConnection
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
@@ -52,23 +55,45 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun stop() {
-        TODO("Not yet implemented")
+        mService?.stop()
     }
 
     private fun puase() {
-        TODO("Not yet implemented")
+        mService?.pause()
     }
 
     private fun play() {
-        TODO("Not yet implemented")
+        mService?.play()
     }
 
     override fun onResume() {
         super.onResume()
+
+        // 액티비티가 화면 전면으로 실행될 때, 서비스 실행
+        if (mService == null){
+            // 안드로이드 Oreo 이상이면 startForegroundService를 사용해야 한다.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                startForegroundService(Intent(this, MusicPlayerService::class.java))
+            } else {
+                startService(Intent(applicationContext, MusicPlayerService::class.java))
+            }
+            // 액티비티를 서비스와 바인드 시킨다.
+            val intent = Intent(this, MusicPlayerService::class.java)
+            // 서비스와 바인드
+            bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE)
+        }
     }
 
     override fun onPause() {
         super.onPause()
+        // 사용자가 액티비티를 떠났을 대 처리
+        if (mService != null){
+            if(!mService!!.isPlaying()){    // mService가 재생되고 있지 않다면
+                mService!!.stopSelf()       // 서비스를 중단
+            }
+            unbindService(mServiceConnection)   // 서비스로부터 연결을 끊는다.
+            mService = null
+        }
     }
 }
 
