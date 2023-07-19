@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         blueButton.setOnClickListener{
             val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frame_layout, RedFragment())
+            fragmentTransaction.replace(R.id.frame_layout, BlueFragment())
             fragmentTransaction.commit()
         }
     }
