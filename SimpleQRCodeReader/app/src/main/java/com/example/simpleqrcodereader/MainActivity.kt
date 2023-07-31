@@ -2,6 +2,7 @@ package com.example.simpleqrcodereader
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +14,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.example.simpleqrcodereader.databinding.ActivityMainBinding
 import com.google.common.util.concurrent.ListenableFuture
-import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -75,7 +75,13 @@ class MainActivity : AppCompatActivity() {
 
         imageAnalysis.setAnalyzer(cameraExcutor, QRCodeAnalyzer(object : OnDetectListener{
             override fun onDetect(msg: String) {
-                Toast.makeText(this@MainActivity, "${msg}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@MainActivity, "${msg}", Toast.LENGTH_SHORT).show()
+                if(!isDetected){
+                    isDetected = true
+                    val intent = Intent(this@MainActivity, ResultActivity::class.java)
+                    intent.putExtra("msg", msg)
+                    startActivity(intent)
+                }
             }
         }))
         return imageAnalysis
