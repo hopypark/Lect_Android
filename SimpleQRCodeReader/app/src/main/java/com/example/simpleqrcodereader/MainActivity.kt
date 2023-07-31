@@ -18,6 +18,8 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
+    private var isDetected = false
+
 
     private lateinit var binding: ActivityMainBinding   // 바인딩 변수 선언
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
@@ -38,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             startCamera()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isDetected = false;
     }
 
     private fun hasPermissions(context: Context) = PERMISSIONS_REQUIRED.all {
