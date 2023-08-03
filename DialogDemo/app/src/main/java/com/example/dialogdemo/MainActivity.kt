@@ -1,13 +1,16 @@
 package com.example.dialogdemo
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
@@ -21,7 +24,18 @@ class MainActivity : AppCompatActivity() {
         //showToast()
 //        showDatePick()
 //        showTimePicker()
-        showDialog2()
+//        showDialog2()
+        customDialog()
+    }
+
+    fun customDialog(){
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val rootView = inflater.inflate(R.layout.dialog_input, null)
+        val builder = AlertDialog.Builder(this)
+            builder.setTitle("Input Dialog")
+            builder.setView(rootView)
+            builder.setPositiveButton("확인", null)
+            builder.show()
     }
 
     fun showDialog2(){
