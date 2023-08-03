@@ -1,14 +1,18 @@
 package com.example.dialogdemo
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.media.MediaPlayer
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.DatePicker
@@ -25,7 +29,14 @@ class MainActivity : AppCompatActivity() {
 //        showDatePick()
 //        showTimePicker()
 //        showDialog2()
-        customDialog()
+        //customDialog()
+//        val ringtoneUri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+//        val ringtone = RingtoneManager.getRingtone(applicationContext, ringtoneUri)
+//        ringtone.play()
+
+//        val player: MediaPlayer = MediaPlayer.create(this, R.raw.hare)
+//        player.start()
+
     }
 
     fun customDialog(){
