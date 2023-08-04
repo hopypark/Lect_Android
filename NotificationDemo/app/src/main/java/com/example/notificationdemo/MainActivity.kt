@@ -55,38 +55,38 @@ class MainActivity : AppCompatActivity() {
         builder.setWhen(System.currentTimeMillis())
         builder.setContentTitle("Content Title")
         builder.setContentText("Content Message")
-        /// 이미지 스타일
-//        val bigPicture = BitmapFactory.decodeResource(resources, R.drawable.banff1)
-//        val bigStyle = NotificationCompat.BigPictureStyle()
-//        bigStyle.bigPicture(bigPicture)
-//        builder.setStyle(bigStyle)
-
-        val bigTextStyle = NotificationCompat.BigTextStyle()
-        bigTextStyle.bigText(resources.getString(R.string.poem))
-        builder.setStyle(bigTextStyle)
+        // 이미지 스타일
+        val bigPicture = BitmapFactory.decodeResource(resources, R.drawable.banff1)
+        val bigStyle = NotificationCompat.BigPictureStyle()
+        bigStyle.bigPicture(bigPicture)
+        builder.setStyle(bigStyle)
+        // 빅 텍스트 스타일
+//        val bigTextStyle = NotificationCompat.BigTextStyle()
+//        bigTextStyle.bigText(resources.getString(R.string.poem))
+//        builder.setStyle(bigTextStyle)
 
         // Action
-//        val actionIntent = Intent(this, OneReceiver::class.java)
-//        val actionPendingIntent = PendingIntent.getBroadcast(this, 20, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-//        builder.addAction(NotificationCompat.Action.Builder(
-//            android.R.drawable.stat_notify_more, "Action", actionPendingIntent
-//        ).build())
-//        // 원격 입력
-//        val KEY_TEXT_REPLY = "key_text_reply"
-//        var replyLabel: String = "답장"
-//        var remoteInput: RemoteInput = RemoteInput.Builder(KEY_TEXT_REPLY)
-//                                            .setLabel(replyLabel)
-//                                            .build()
-//
-//        val replyIntent = Intent(this, ReplyReceiver::class.java)
-//        val replyPendingIntent = PendingIntent.getBroadcast(this, 30, replyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-//        builder.addAction(
-//            NotificationCompat.Action.Builder(
-//                R.drawable.send,
-//                "답장",
-//                replyPendingIntent
-//            ).addRemoteInput(remoteInput).build()
-//        )
+        val actionIntent = Intent(this, OneReceiver::class.java)
+        val actionPendingIntent = PendingIntent.getBroadcast(this, 20, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        builder.addAction(NotificationCompat.Action.Builder(
+            android.R.drawable.stat_notify_more, "Action", actionPendingIntent
+        ).build())
+        // 원격 입력
+        val KEY_TEXT_REPLY = "key_text_reply"
+        var replyLabel: String = "답장"
+        var remoteInput: RemoteInput = RemoteInput.Builder(KEY_TEXT_REPLY)
+                                            .setLabel(replyLabel)
+                                            .build()
+
+        val replyIntent = Intent(this, ReplyReceiver::class.java)
+        val replyPendingIntent = PendingIntent.getBroadcast(this, 30, replyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        builder.addAction(
+            NotificationCompat.Action.Builder(
+                R.drawable.send,
+                "답장",
+                replyPendingIntent
+            ).addRemoteInput(remoteInput).build()
+        )
 
         manager.notify(11, builder.build())
     }
