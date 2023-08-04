@@ -11,8 +11,10 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CombinedVibration
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.os.VibratorManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.DatePicker
@@ -36,17 +38,53 @@ class MainActivity : AppCompatActivity() {
 
 //        val player: MediaPlayer = MediaPlayer.create(this, R.raw.hare)
 //        player.start()
+        // Vibrator
+//        val vibrator: Vibrator
+//        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            //val effect = VibrationEffect.createOneShot(100L, VibrationEffect.DEFAULT_AMPLITUDE)
+//            val effect = VibrationEffect.createWaveform(longArrayOf(500,1000, 500, 2000), intArrayOf(0, 50, 0, 200), -1)
+//            vibrator.vibrate(effect)
+//        }else{
+//            vibrator.vibrate(500)
+//        }
+
+        val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+        }else{
+           getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val vibrator = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+
+            //val effect = VibrationEffect.createOneShot(100L, VibrationEffect.DEFAULT_AMPLITUDE)
+            val effect = VibrationEffect.createWaveform(longArrayOf(500,1000, 500, 2000), intArrayOf(0, 50, 0, 200), -1)
+            val combinedVibration = CombinedVibration.createParallel(effect)
+            vibrator.vibrate(combinedVibration)
+        }else{
+            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            //val effect = VibrationEffect.createOneShot(100L, VibrationEffect.DEFAULT_AMPLITUDE)
+            val effect = VibrationEffect.createWaveform(longArrayOf(500,1000, 500, 2000), intArrayOf(0, 50, 0, 200), -1)
+            vibrator.vibrate(effect)
+
+        }
+
+
+
+
 
     }
 
     fun customDialog(){
-        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val rootView = inflater.inflate(R.layout.dialog_input, null)
-        val builder = AlertDialog.Builder(this)
-            builder.setTitle("Input Dialog")
-            builder.setView(rootView)
-            builder.setPositiveButton("확인", null)
-            builder.show()
+//        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        val rootView = inflater.inflate(R.layout.dialog_input, null)
+//        val builder = AlertDialog.Builder(this)
+//            builder.setTitle("Input Dialog")
+//            builder.setView(rootView)
+//            builder.setPositiveButton("확인", null)
+//            builder.show()
     }
 
     fun showDialog2(){
