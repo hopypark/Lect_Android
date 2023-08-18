@@ -5,11 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 
-class MyAirplaneReceiver : BroadcastReceiver() {
+const val TAG = "MyReceiver"
 
-    companion object {
-        private const val TAG = "MyReceiver"
-    }
+class MyAirplaneReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
@@ -20,6 +18,8 @@ class MyAirplaneReceiver : BroadcastReceiver() {
             }else{
                 Log.d(TAG, "ACTION: 비행기 모드 해제")
             }
+        } else if (intent.action.equals(MY_ACTION_BROADCAST)){
+            Log.d(TAG, "ACTION: 사용자가 보낸 방송을 받음")
         }
     }
 }
